@@ -1,0 +1,2 @@
+ls -map|sort -d
+#!/bin/bash
