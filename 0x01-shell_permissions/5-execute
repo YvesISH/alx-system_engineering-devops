@@ -1,2 +1,2 @@
 #!/bin/bash
--rwx-----x hello
+chmod u+x hello
