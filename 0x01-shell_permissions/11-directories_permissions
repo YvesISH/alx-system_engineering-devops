@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R urgo+X
+find ./* -type d -print | wc -l
