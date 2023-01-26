@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Bash script that displays contents of current directory in list format, where only the part of the name after hyphen is displayed 
+# Use for loop
+
+list=$(ls)
+for i in $list; do
+  echo "$i" | cut -d '-' -f2
+done

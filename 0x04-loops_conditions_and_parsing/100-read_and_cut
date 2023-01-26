@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Bash script that displays contents of the file '/etc/passwd':
+#	-username
+#	-user id
+#	-home directory path for the user
+# Use while loop
+
+while read -r passwd; do
+  echo "$passwd" | cut -d ':' -f1,3,6
+done < "/etc/passwd"
