@@ -3,7 +3,7 @@ frontend www-http
     mode http
     default_backend web-backend
 frontend www-https
-    bind *:443 ssl crt /etc/haproxy/ishimwe.tech.pem
+    bind *:443 ssl crt /etc/haproxy/yves-ish.tech.pem
     http-request set-header X-Forwarded-Proto https
     acl letsencrypt-acl path_beg /.well-known/acme-challenge/
     use_backend letsencrypt-backend if letsencrypt-acl
