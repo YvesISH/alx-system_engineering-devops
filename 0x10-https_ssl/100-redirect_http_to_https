@@ -1,0 +1,18 @@
+frontend www-http
+    bind *:80
+    mode http
+    default_backend web-backend
+frontend www-https
+    bind *:443 ssl crt /etc/haproxy/yves-ish.tech.pem
+    http-request set-header X-Forwarded-Proto https
+    acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+    use_backend letsencrypt-backend if letsencrypt-acl
+    default_backend web-backend
+
+backend web-backend
+    redirect scheme https unless { ssl_fc }
+    balance roundrobin
+    server 56300-web-01 100.26.173.71:80 check
+    server 56300-web-02 35.174.208.128:80 check
+backend letsencrypt-backend
+   server letsencrypt 127.0.0.1:54321
