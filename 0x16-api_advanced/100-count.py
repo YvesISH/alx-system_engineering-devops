@@ -1,13 +1,19 @@
 #!/usr/bin/python3
-"""
-Last One
-"""
+""" Recursive function that queries the Reddit API
+    parses the title of all hot articles, and prints a sorted count"""
+import requests
 import sys
+after = None
+count_dic = []
 
-if __name__ == '__main__':
-    count_words = __import__('100-count').count_words
-    if len(sys.argv) < 3:
-        print("Usage: {} <subreddit> <list of keywords>".format(sys.argv[0]))
-        print("Ex: {} programming 'python java javascript'".format(sys.argv[0]))
-    else:
-        result = count_words(sys.argv[1], [x for x in sys.argv[2].split()])
+
+def count_words(subreddit, word_list):
+    """parses the title of all hot articles, and prints a sorted count of given
+    keywords (case-insensitive, delimited by spaces) """
+    global after
+    global count_dic
+    headers = {'User-Agent': 'xica369'}
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    parameters = {'after': after}
+    response = requests.get(url, headers=headers, allow_redirects=False,
+                            params=parameters)
